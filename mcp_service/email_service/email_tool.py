@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field   # 用于输入参数校验
-from fastmcp import FastMCP
 from email.mime.text import MIMEText
 from dotenv import load_dotenv  # 用于加载环境变量
 import os   # 用于读取环境变量
@@ -11,20 +10,20 @@ load_dotenv()
 # 参数验证
 class EmailArgs(BaseModel):
     # 收件人邮箱：必填
-    dest_email: list[str] = Field(..., description="收件人邮箱列表(至少包含一个收件人)", example=["<EMAIL>", "<EMAIL>"])
+    dest_email: list[str] = Field(..., description="收件人邮箱列表(至少包含一个收件人，必填)", example=["<EMAIL>", "<EMAIL>"])
     # 邮件主题：必填
-    subject: str = Field(..., description="邮件主题")
+    subject: str = Field(..., description="邮件主题，必填")
     # 邮件内容：必填
-    content: str = Field(..., description="邮件内容")
+    content: str = Field(..., description="邮件内容，必填")
 
 
 # MCP工具
 def email_tool(dest_email: list[str], subject: str, content: str) -> str:
     """
     向一个或多个收件人发送邮件
-    :param dest_email: 收件人邮箱列表
-    :param subject: 邮箱主题
-    :param content: 邮箱内容
+    :param dest_email: 收件人邮箱列表(必填)
+    :param subject: 邮箱主题(必填)
+    :param content: 邮箱内容(必填)
     """
     try:
         # 创建邮件对象

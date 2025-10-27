@@ -1,5 +1,4 @@
 from pydantic import BaseModel, Field   # 用于输入参数校验
-from fastmcp import FastMCP
 from dotenv import load_dotenv  # 用于加载环境变量
 import os   # 用于读取环境变量
 import mysql.connector  # 用于连接Mysql数据库
@@ -16,12 +15,6 @@ pool = mysql.connector.pooling.MySQLConnectionPool(
     user=os.getenv("MYSQL_USER"),
     password=os.getenv("MYSQL_PASSWORD"),
     database=os.getenv("MYSQL_DATABASE"),
-)
-
-# 创建 MCP 应用程序
-app = FastMCP(
-    name="MCP",
-    version="1.0.0"
 )
 
 

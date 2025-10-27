@@ -36,4 +36,5 @@ pool = Neo4jPool(
     user=os.getenv("NEO4J_USER"),
     password=os.getenv("NEO4J_PASSWORD"),
     database=os.getenv("NEO4J_DATABASE"),
+    pool_size=int(os.getenv("NEO4J_POOL_SIZE", 20))
 )

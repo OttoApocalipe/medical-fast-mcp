@@ -1,14 +1,9 @@
-from fastmcp import FastMCP
 from pydantic import BaseModel, Field
-from utils.neo4j_pool import Neo4jPool
 from dotenv import load_dotenv
 from utils.neo4j_pool import pool
 import os
 
 load_dotenv()
-
-# MCP 应用
-app = FastMCP(name="MCP", version="1.0.0")
 
 
 # 参数类
@@ -24,7 +19,7 @@ def neo4j_tool(cypher: str) -> str:
     """
     try:
         driver = pool.create_driver()
-        with driver.session() as session:
+        with driver.session(database=os.getenv("NEO4J_DATABASE")) as session:
             records = session.run(cypher)
             result = [record.data() for record in records]
             return str(result)
