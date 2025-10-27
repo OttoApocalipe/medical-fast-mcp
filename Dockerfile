@@ -20,6 +20,7 @@ COPY . .
 # 暴露端口
 EXPOSE 8001
 
+# 设置Python工作目录
 ENV PYTHONPATH=/app
 
 # 启动服务命令
